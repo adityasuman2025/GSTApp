@@ -6,9 +6,12 @@ import android.widget.TextView;
 
 import com.opencsv.CSVReader;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class Dashboard extends AppCompatActivity
 {
@@ -21,19 +24,18 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
 
         text = findViewById(R.id.text);
-        String t = "";
 
+        String result = "";
         try
         {
-//            String csvfileString = this.getApplicationInfo().dataDir + File.separatorChar + "csvfile.csv";
-//            File csvfile = new File(csvfileString);
+            InputStream is = this.getResources().openRawResource(R.raw.saran);
 
-            CSVReader reader = new CSVReader(new FileReader("yourfile.csv"));
+            CSVReader reader = new CSVReader(new InputStreamReader(is, "UTF8"));
             String[] nextLine;
             while ((nextLine = reader.readNext()) != null)
             {
-                // nextLine[] is an array of values from the line
-                t += (nextLine[0] + nextLine[1] + "etc...");
+            // nextLine[] is an array of values from the line
+                result += (nextLine[0] + nextLine[1] + "etc...");
             }
         }
         catch (IOException e)
@@ -41,7 +43,7 @@ public class Dashboard extends AppCompatActivity
 
         }
 
-        text.setText(t);
+        text.setText(result);
 
     }
 }
