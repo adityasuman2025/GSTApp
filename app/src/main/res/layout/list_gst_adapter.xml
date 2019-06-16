@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="TR Name"
             android:textStyle="bold"
-            android:textSize="62px"
+            android:textSize="58px"
             android:textColor="@color/colorAccent" />
 
         <TextView
@@ -43,20 +43,20 @@
             android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
+            android:id="@+id/nonFilerAs29May"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Non Filers as on 29th May"
+            android:textStyle="bold"
+            android:textSize="50px"
+            android:textColor="@color/colorAccent"/>
+
+        <TextView
             android:id="@+id/gstin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="GSTIN"
             android:textSize="45px"/>
-
-        <TextView
-            android:id="@+id/nonFilerAs29May"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Non Filers As on 29th May"
-            android:textStyle="bold"
-            android:textSize="50px"
-            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/division"

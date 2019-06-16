@@ -1,14 +1,17 @@
 package in.mngo.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +83,7 @@ public class Dashboard extends AppCompatActivity
                 String nonFilers = jsonObject.getString("NON FILERS AS ON 29TH MAY");
                 String GSTINCount = jsonObject.getString("GSTIN");
 
-                nonFilersCount.setText("Non Filers:" + nonFilers);
+                nonFilersCount.setText("Non Filers: " + nonFilers);
                 GSTCount.setText("Registered GST: " + GSTINCount);
 
             //storing JSON in array format
@@ -111,6 +114,15 @@ public class Dashboard extends AppCompatActivity
             //listing in array adapter
                 ListGSTAdapter listGSTAdapter = new ListGSTAdapter();
                 listGST.setAdapter(listGSTAdapter);
+
+            //on clicking on list
+                listGST.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+                    {
+                        Toast.makeText(Dashboard.this, MOBILE_NU_array.get(position), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
         catch (ExecutionException e) {
@@ -136,7 +148,7 @@ public class Dashboard extends AppCompatActivity
     }
 
 //creating custom adapter to list issued keys
-    class ListGSTAdapter extends BaseAdapter
+    public class ListGSTAdapter extends BaseAdapter
     {
         @Override
         public int getCount()
@@ -171,7 +183,7 @@ public class Dashboard extends AppCompatActivity
             trName.setText(TR_NAME_array.get(i));
             mobileNo.setText(MOBILE_NU_array.get(i));
             gstin.setText(GSTIN_array.get(i));
-            nonFilerAs29May.setText(NON_FILERS_AS_ON_29TH_MAY_array.get(i));
+            nonFilerAs29May.setText("Non Filers as on 29th May: " + NON_FILERS_AS_ON_29TH_MAY_array.get(i));
             division.setText(DIVISION_array.get(i));
 
             return view;
