@@ -17,7 +17,6 @@
         android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_toEndOf="@id/personIcon"
         android:layout_toRightOf="@id/personIcon"
         android:orientation="vertical"
@@ -30,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="TR Name"
             android:textStyle="bold"
-            android:textSize="58px"
+            android:textSize="55px"
             android:textColor="@color/colorAccent" />
 
         <TextView
@@ -38,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mobile No"
-            android:textSize="50px"
+            android:textSize="45px"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
 
@@ -48,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="Non Filers as on 29th May"
             android:textStyle="bold"
-            android:textSize="50px"
+            android:textSize="45px"
             android:textColor="@color/colorAccent"/>
 
         <TextView
@@ -56,13 +55,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="GSTIN"
-            android:textSize="45px"/>
+            android:textSize="40px"/>
 
         <TextView
             android:id="@+id/division"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Division"
-            android:textSize="45px"/>
+            android:textSize="40px"/>
     </LinearLayout>
 </RelativeLayout>
