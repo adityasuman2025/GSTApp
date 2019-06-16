@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dashboard"
-    >
+    tools:context=".Dashboard">
 
     <LinearLayout
         android:id="@+id/headerInfo"
@@ -14,7 +13,7 @@
         android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:background="@color/colorAccent"
-        android:padding="20px">
+        android:padding="30px">
 
         <TextView
             android:id="@+id/text"
@@ -29,7 +28,7 @@
             android:id="@+id/nonFilersCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="70px"
+            android:textSize="60px"
             android:text=""
             android:textColor="@color/white"/>
 
@@ -37,7 +36,7 @@
             android:id="@+id/GSTCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="70px"
+            android:textSize="60px"
             android:text=""
             android:textColor="@color/white"/>
     </LinearLayout>

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,10 +47,16 @@ public class Dashboard extends AppCompatActivity
             if(JSONResultString.equals("-1"))
             {
                 text.setText("CSV file not found");
+
+                nonFilersCount.setVisibility(View.GONE);
+                GSTCount.setVisibility(View.GONE);
             }
             else  if(JSONResultString.equals("-2"))
             {
                 text.setText("Failed to parse CSV file");
+
+                nonFilersCount.setVisibility(View.GONE);
+                GSTCount.setVisibility(View.GONE);
             }
             else
             {
@@ -63,10 +71,24 @@ public class Dashboard extends AppCompatActivity
                 JSONObject jsonObject = jsonArray.getJSONObject(len-1);
 
                 String nonFilers = jsonObject.getString("NON FILERS AS ON 29TH MAY");
-                String GSTIN = jsonObject.getString("GSTIN");
+                String GSTINCount = jsonObject.getString("GSTIN");
 
                 nonFilersCount.setText("Non Filers:" + nonFilers);
-                GSTCount.setText("Registered GST: " + GSTIN);
+                GSTCount.setText("Registered GST: " + GSTINCount);
+
+                JSONObject jo = new JSONObject();
+
+                for (int i=0; i < len - 1; i++)
+                {
+                    jo = jsonArray.getJSONObject(i);
+
+                    String DIVISION = jo.getString("DIVISION");
+                    String GSTIN = jo.getString("GSTIN");
+                    String TR_NAME = jo.getString("TR_NAME");
+                    String MOBILE_NU = jo.getString("MOBILE_NU");
+                    String NON_FILERS_AS_ON_29TH_MAY = jo.getString("NON FILERS AS ON 29TH MAY");
+
+                }
             }
         }
         catch (ExecutionException e) {
@@ -75,9 +97,11 @@ public class Dashboard extends AppCompatActivity
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+            text.setText("Failed to parse CSV file");
         }
     }
 
+//function to initialize all the views
     public void viewInitializer()
     {
         text = findViewById(R.id.text);
@@ -88,5 +112,56 @@ public class Dashboard extends AppCompatActivity
 
         listGST = findViewById(R.id.listGST);
     }
+
+//creating custom adapter to list issued keys
+//    class IssuedKeysHistoryAdapter extends BaseAdapter
+//    {
+//        @Override
+//        public int getCount()
+//        {
+//            return issue_ids.length;
+//        }
+//
+//        @Override
+//        public Object getItem(int i) {
+//            return null;
+//        }
+//
+//        @Override
+//        public long getItemId(int i) {
+//            return 0;
+//        }
+//
+//        @Override
+//        public View getView(int i, View view, ViewGroup viewGroup)
+//        {
+//            //rendering the layout
+//            view = getLayoutInflater().inflate(R.layout.list_gst_adapter, null);
+//
+//            //defining variables
+//            TextView key_name = view.findViewById(R.id.key_name);
+//            TextView issue_date = view.findViewById(R.id.issue_date);
+//
+//            TextView issue_status = view.findViewById(R.id.issue_status);
+//
+//            //setting the variables to a value
+//            key_name.setText(key_names[i]);
+//            issue_date.setText(issued_ons[i]);
+//
+//            String status = "NA";
+//            if(statuses[i].equals("1"))//not returned
+//            {
+//                status = "N-R"; //Not-Returned
+//            }
+//            else if(statuses[i].equals("2"))//returned
+//            {
+//                status = "R"; //Returned
+//            }
+//
+//            issue_status.setText(status);
+//
+//            return view;
+//        }
+//    }
 
 }
