@@ -40,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                String username = usernameInput.getText().toString();
-                String password = passwordInput.getText().toString();
+                String username = (usernameInput.getText().toString()).trim();
+                String password = (passwordInput.getText().toString()).trim();
 
                 if(username.equals("saran") && password.equals("saran"))
                 {
                     editor.putString("username", username);
+                    editor.apply();
 
                 //redirecting to the dashboard activity
                     startActivity(dashboardIntent);
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 else if(username.equals("patnasc") && password.equals("patnasc"))
                 {
                     editor.putString("username", username);
+                    editor.apply();
 
                 //redirecting to the dashboard activity
                     startActivity(dashboardIntent);

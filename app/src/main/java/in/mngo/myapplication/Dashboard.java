@@ -1,26 +1,18 @@
 package in.mngo.myapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import com.opencsv.CSVReader;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class Dashboard extends AppCompatActivity
 {
     TextView text;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,53 +21,29 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
 
         text = findViewById(R.id.text);
+        text.setText("Please wait! Parsing CSV file");
 
+        sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "DNE");
 
-    //to open csv file and store it in JSON
-        ArrayList<String> title = new ArrayList<String>();
-        JSONArray jsonArray = new JSONArray();
-
+    //getting data from csv file as JSON format (in different thread other than UIThread using Async task)
         try
         {
-            InputStream is = this.getResources().openRawResource(R.raw.saran);
-            CSVReader reader = new CSVReader(new InputStreamReader(is, "UTF8"));
+            String JSONvalue = new CsvToJSON(this).execute(username).get();
 
-        //to get the title of the array
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null)
+            if(JSONvalue.equals("-1"))
             {
-                int len = nextLine.length;
-                for(int i= 0; i< len; i++)
-                {
-                    title.add(nextLine[i]);
-                }
-
-                break;
+                text.setText("CSV file not found");
             }
-
-        //to get elements of the csv file as JSON
-            while ((nextLine = reader.readNext()) != null)
+            else
             {
-                int len = nextLine.length;
-
-                JSONObject item = new JSONObject();
-
-                for(int i= 0; i< len; i++)
-                {
-                    item.put(title.get(i), nextLine[i]);
-                }
-
-                jsonArray.put(item);
+                text.setText(JSONvalue);
             }
         }
-        catch (IOException e)
-        {
+        catch (ExecutionException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        text.setText(jsonArray.toString());
-
     }
 }
