@@ -3,6 +3,7 @@ package in.mngo.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -120,7 +121,11 @@ public class Dashboard extends AppCompatActivity
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
                     {
-                        Toast.makeText(Dashboard.this, MOBILE_NU_array.get(position), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Dashboard.this, MOBILE_NU_array.get(position), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:" + MOBILE_NU_array.get(position)));
+                        startActivity(intent);
                     }
                 });
             }
