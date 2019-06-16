@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class Dashboard extends AppCompatActivity
@@ -26,6 +27,12 @@ public class Dashboard extends AppCompatActivity
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+    ArrayList<String> DIVISION_array = new ArrayList();
+    ArrayList<String> GSTIN_array = new ArrayList();
+    ArrayList<String> TR_NAME_array = new ArrayList();
+    ArrayList<String> MOBILE_NU_array = new ArrayList();
+    ArrayList<String> NON_FILERS_AS_ON_29TH_MAY_array = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,10 +83,12 @@ public class Dashboard extends AppCompatActivity
                 nonFilersCount.setText("Non Filers:" + nonFilers);
                 GSTCount.setText("Registered GST: " + GSTINCount);
 
-                JSONObject jo = new JSONObject();
+            //storing JSON in array format
+                JSONObject jo = null;
 
-                for (int i=0; i < len - 1; i++)
+                for (int i = 0; i < len - 1; i++)
                 {
+                //getting values from JSON
                     jo = jsonArray.getJSONObject(i);
 
                     String DIVISION = jo.getString("DIVISION");
@@ -88,7 +97,20 @@ public class Dashboard extends AppCompatActivity
                     String MOBILE_NU = jo.getString("MOBILE_NU");
                     String NON_FILERS_AS_ON_29TH_MAY = jo.getString("NON FILERS AS ON 29TH MAY");
 
+                //storing values in array
+                    if(!NON_FILERS_AS_ON_29TH_MAY.equals("0"))
+                    {
+                        DIVISION_array.add(DIVISION);
+                        GSTIN_array.add(GSTIN);
+                        TR_NAME_array.add(TR_NAME);
+                        MOBILE_NU_array.add(MOBILE_NU);
+                        NON_FILERS_AS_ON_29TH_MAY_array.add(NON_FILERS_AS_ON_29TH_MAY);
+                    }
                 }
+
+            //listing in array adapter
+                ListGSTAdapter listGSTAdapter = new ListGSTAdapter();
+                listGST.setAdapter(listGSTAdapter);
             }
         }
         catch (ExecutionException e) {
@@ -114,54 +136,46 @@ public class Dashboard extends AppCompatActivity
     }
 
 //creating custom adapter to list issued keys
-//    class IssuedKeysHistoryAdapter extends BaseAdapter
-//    {
-//        @Override
-//        public int getCount()
-//        {
-//            return issue_ids.length;
-//        }
-//
-//        @Override
-//        public Object getItem(int i) {
-//            return null;
-//        }
-//
-//        @Override
-//        public long getItemId(int i) {
-//            return 0;
-//        }
-//
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup)
-//        {
-//            //rendering the layout
-//            view = getLayoutInflater().inflate(R.layout.list_gst_adapter, null);
-//
-//            //defining variables
-//            TextView key_name = view.findViewById(R.id.key_name);
-//            TextView issue_date = view.findViewById(R.id.issue_date);
-//
-//            TextView issue_status = view.findViewById(R.id.issue_status);
-//
-//            //setting the variables to a value
-//            key_name.setText(key_names[i]);
-//            issue_date.setText(issued_ons[i]);
-//
-//            String status = "NA";
-//            if(statuses[i].equals("1"))//not returned
-//            {
-//                status = "N-R"; //Not-Returned
-//            }
-//            else if(statuses[i].equals("2"))//returned
-//            {
-//                status = "R"; //Returned
-//            }
-//
-//            issue_status.setText(status);
-//
-//            return view;
-//        }
-//    }
+    class ListGSTAdapter extends BaseAdapter
+    {
+        @Override
+        public int getCount()
+        {
+            return DIVISION_array.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup)
+        {
+        //rendering the layout
+            view = getLayoutInflater().inflate(R.layout.list_gst_adapter, null);
+
+        //defining variables
+            TextView trName = view.findViewById(R.id.trName);
+            TextView mobileNo = view.findViewById(R.id.mobileNo);
+            TextView gstin = view.findViewById(R.id.gstin);
+            TextView nonFilerAs29May = view.findViewById(R.id.nonFilerAs29May);
+            TextView division = view.findViewById(R.id.division);
+
+        //setting the variables to a value
+            trName.setText(TR_NAME_array.get(i));
+            mobileNo.setText(MOBILE_NU_array.get(i));
+            gstin.setText(GSTIN_array.get(i));
+            nonFilerAs29May.setText(NON_FILERS_AS_ON_29TH_MAY_array.get(i));
+            division.setText(DIVISION_array.get(i));
+
+            return view;
+        }
+    }
 
 }

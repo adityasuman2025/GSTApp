@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="TR Name"
             android:textStyle="bold"
-            android:textSize="65px"
+            android:textSize="62px"
             android:textColor="@color/colorAccent" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:textSize="45px"/>
 
         <TextView
-            android:id="@+id/nonFilerCount"
+            android:id="@+id/nonFilerAs29May"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Non Filers As on 29th May"
