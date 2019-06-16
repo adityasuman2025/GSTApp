@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dashboard">
+    tools:context=".Dashboard"
+    >
 
     <LinearLayout
+        android:id="@+id/headerInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15px">
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:padding="20px">
 
         <TextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="@color/red"/>
+            android:textColor="@color/red"
+            android:text="err"
+            android:textSize="45px"/>
 
         <TextView
             android:id="@+id/nonFilersCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="60px"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="Non Filers: "/>
+            android:textSize="70px"
+            android:text=""
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/GSTCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="60px"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="Registered GST: "/>
-
+            android:textSize="70px"
+            android:text=""
+            android:textColor="@color/white"/>
     </LinearLayout>
 
-</ScrollView>
+    <LinearLayout
+        android:layout_below="@+id/headerInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listGST"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

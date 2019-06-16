@@ -89,6 +89,8 @@ public class CsvToJSON extends AsyncTask<String,Void,String>
             return "-2";
         }
 
-        return jsonArray.toString();
+        //return jsonArray.toString();
+
+        return "-1";
     }
 }
