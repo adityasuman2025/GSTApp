@@ -35,6 +35,10 @@ public class Dashboard extends AppCompatActivity
             {
                 text.setText("CSV file not found");
             }
+            else  if(JSONvalue.equals("-2"))
+            {
+                text.setText("Failed to parse CSV file");
+            }
             else
             {
                 text.setText(JSONvalue);
