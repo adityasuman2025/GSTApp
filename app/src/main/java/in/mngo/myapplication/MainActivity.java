@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                String username = (usernameInput.getText().toString()).trim();
+                String username = (usernameInput.getText().toString()).trim().toLowerCase();
                 String password = (passwordInput.getText().toString()).trim();
 
                 if(username.equals("saran") && password.equals("saran"))

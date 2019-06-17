@@ -6,13 +6,13 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +45,8 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
 
         viewInitializer();
+
+        Log.i("myApp", "Hello World");
 
     //checking cookies for username
         sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
