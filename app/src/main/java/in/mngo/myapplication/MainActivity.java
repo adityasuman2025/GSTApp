@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+//function to initialize all the views of the activity
     public void viewInitializer()
     {
         usernameInput = findViewById(R.id.usernameInput);
