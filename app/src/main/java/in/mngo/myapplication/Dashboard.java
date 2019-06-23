@@ -49,7 +49,7 @@ public class Dashboard extends AppCompatActivity
 
         viewInitializer();
 
-        Log.i("myApp", "Hello World");
+        //Log.i("myApp", "Hello World");
 
     //checking cookies for username
         sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
@@ -58,6 +58,9 @@ public class Dashboard extends AppCompatActivity
     //getting data from csv file as JSON format (in different thread other than UIThread using Async task)
         try
         {
+//            String type = "list_reports_in_db";
+//            String report_listResult = new DatabaseActions().execute(type).get();
+
             String JSONResultString = new CsvToJSON(this).execute(username).get();
 
             if(JSONResultString.equals("-1"))
