@@ -6,62 +6,98 @@
     android:orientation="vertical"
     android:padding="10px">
 
-    <ImageView
-        android:id="@+id/personIcon"
-        android:layout_width="200px"
-        android:layout_height="300px"
-        android:layout_marginTop="30px"
-        android:src="@drawable/person1" />
-
     <LinearLayout
-        android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/personIcon"
-        android:layout_toRightOf="@id/personIcon"
-        android:orientation="vertical"
-        android:paddingLeft="20px"
-        android:paddingTop="10px">
+        android:orientation="horizontal"
+        android:weightSum="6">
 
-        <TextView
-            android:id="@+id/trName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TR Name"
-            android:textStyle="bold"
-            android:textSize="55px"
-            android:textColor="@color/colorAccent" />
+        <ImageView
+            android:id="@+id/personIcon"
+            android:layout_width="0px"
+            android:layout_height="300px"
+            android:layout_marginTop="10px"
+            android:src="@drawable/person1"
+            android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/mobileNo"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/ok"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:text="Mobile No"
-            android:textSize="45px"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:orientation="vertical"
+            android:paddingLeft="20px"
+            android:layout_weight="4">
 
-        <TextView
-            android:id="@+id/nonFilerAs29May"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Non Filers as on 29th May"
-            android:textStyle="bold"
-            android:textSize="45px"
-            android:textColor="@color/colorAccent"/>
+            <TextView
+                android:id="@+id/trName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TR Name"
+                android:textStyle="bold"
+                android:textSize="55px"
+                android:textColor="@color/colorAccent" />
 
-        <TextView
-            android:id="@+id/gstin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GSTIN"
-            android:textSize="40px"/>
+            <TextView
+                android:id="@+id/nonFilerAs29May"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Non Filers as on 29th May"
+                android:textStyle="bold"
+                android:textSize="45px"
+                android:textColor="@color/colorAccent"/>
 
-        <TextView
-            android:id="@+id/division"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/mobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Major Commodity"
+                android:textSize="45px"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/gstin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GSTIN"
+                android:textSize="40px"/>
+
+            <TextView
+                android:id="@+id/division"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Division"
+                android:textSize="40px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:text="Division"
-            android:textSize="40px"/>
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/callIcon"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:padding="15px"
+                android:src="@drawable/phone"
+                android:layout_marginBottom="10px"/>
+
+            <ImageView
+                android:id="@+id/reportDoneIcon"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:padding="25px"
+                android:src="@drawable/report_done" />
+
+
+            <ImageView
+                android:id="@+id/reportPendingIcon"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:padding="25px"
+                android:src="@drawable/report_pending" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

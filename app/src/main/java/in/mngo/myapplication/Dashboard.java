@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +39,7 @@ public class Dashboard extends AppCompatActivity
     ArrayList<String> TR_NAME_array = new ArrayList();
     ArrayList<String> MOBILE_NU_array = new ArrayList();
     ArrayList<String> NON_FILERS_AS_ON_29TH_MAY_array = new ArrayList();
+    ArrayList<String> MAJOR_COMMODITY_array = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -102,6 +105,7 @@ public class Dashboard extends AppCompatActivity
                     String TR_NAME = jo.getString("TR_NAME");
                     String MOBILE_NU = jo.getString("MOBILE_NU");
                     String NON_FILERS_AS_ON_29TH_MAY = jo.getString("NON FILERS AS ON 29TH MAY");
+                    String MAJOR_COMMODITY = jo.getString("MAJOR COMMODITY");
 
                 //storing values in array
                     if(!NON_FILERS_AS_ON_29TH_MAY.equals("0"))
@@ -111,6 +115,7 @@ public class Dashboard extends AppCompatActivity
                         TR_NAME_array.add(TR_NAME);
                         MOBILE_NU_array.add(MOBILE_NU);
                         NON_FILERS_AS_ON_29TH_MAY_array.add(NON_FILERS_AS_ON_29TH_MAY);
+                        MAJOR_COMMODITY_array.add(MAJOR_COMMODITY);
                     }
                 }
 
@@ -119,17 +124,13 @@ public class Dashboard extends AppCompatActivity
                 listGST.setAdapter(listGSTAdapter);
 
             //on clicking on list
-                listGST.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
-                    {
-                        //Toast.makeText(Dashboard.this, MOBILE_NU_array.get(position), Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:" + MOBILE_NU_array.get(position)));
-                        startActivity(intent);
-                    }
-                });
+//                listGST.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+//                    {
+//                        //Toast.makeText(Dashboard.this, MOBILE_NU_array.get(position), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         }
         catch (ExecutionException e) {
@@ -176,6 +177,8 @@ public class Dashboard extends AppCompatActivity
         @Override
         public View getView(int i, View view, ViewGroup viewGroup)
         {
+            final int position = i;
+
         //rendering the layout
             view = getLayoutInflater().inflate(R.layout.list_gst_adapter, null);
 
@@ -186,15 +189,40 @@ public class Dashboard extends AppCompatActivity
             TextView nonFilerAs29May = view.findViewById(R.id.nonFilerAs29May);
             TextView division = view.findViewById(R.id.division);
 
+            ImageView callIcon = view.findViewById(R.id.callIcon);
+
+            ImageView reportDoneIcon = view.findViewById(R.id.reportDoneIcon);
+            ImageView reportPendingIcon = view.findViewById(R.id.reportPendingIcon);
+
+            reportDoneIcon.setVisibility(View.GONE);
+
         //setting the variables to a value
             trName.setText(TR_NAME_array.get(i));
-            mobileNo.setText(MOBILE_NU_array.get(i));
+            mobileNo.setText(MAJOR_COMMODITY_array.get(i));
             gstin.setText(GSTIN_array.get(i));
-            nonFilerAs29May.setText("Non Filers as on 29th May: " + NON_FILERS_AS_ON_29TH_MAY_array.get(i));
+            nonFilerAs29May.setText("DP #: " + NON_FILERS_AS_ON_29TH_MAY_array.get(i));
             division.setText(DIVISION_array.get(i));
+
+        //calling to that customer on clicking on phone icon
+            callIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + MOBILE_NU_array.get(position)));
+                    startActivity(intent);
+                }
+            });
+
+        //on clicking on report done icon
+            reportPendingIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    //Intent submitReportIntent = new Intent(Dashboard.this, );
+                }
+            });
 
             return view;
         }
     }
-
 }
