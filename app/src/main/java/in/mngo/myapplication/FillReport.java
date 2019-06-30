@@ -10,7 +10,5 @@ public class FillReport extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_report);
-
-
     }
 }
